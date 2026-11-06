@@ -11,7 +11,9 @@ const verifyToken = require("./middleware/auth");
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: "https://jwt-frontend-umber.vercel.app"
+}));
 app.use(express.json());
 
 // MongoDB Connection
@@ -117,7 +119,7 @@ app.post("/login", async (req, res) => {
             },
             process.env.JWT_SECRET,
             {
-                expiresIn: process.env.JWT_EXPIRES_IN || "1d"
+                expiresIn: process.env.JWT_EXPIRES_IN || "365d"
             }
         );
 
